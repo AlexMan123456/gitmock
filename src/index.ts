@@ -5,6 +5,7 @@ import { writeFile } from "fs/promises";
 class GitTestClient {
   private directory: string;
   repository: string;
+
   constructor(directory: string) {
     this.directory = directory;
     this.repository = path.resolve(this.directory, "test-repository");
