@@ -1,10 +1,7 @@
-import GitTestClient from "src/GitTestClient";
+import GitTestClient, { InitialSetupOptions } from "src/GitTestClient";
 import { type DirectoryOptions, temporaryDirectoryTask } from "tempy";
 
-export interface RepositoryOptions extends DirectoryOptions {
-  initialFileName?: string;
-  initialCommitMessage?: string;
-}
+export type RepositoryOptions = InitialSetupOptions & DirectoryOptions;
 
 function repositoryTask(
   taskFunction: (gitTestClient: GitTestClient) => Promise<void>,
@@ -13,8 +10,7 @@ function repositoryTask(
   return temporaryDirectoryTask(async (temporaryDirectory) => {
     const gitTestClient = await GitTestClient.create(
       temporaryDirectory,
-      options?.initialFileName,
-      options?.initialCommitMessage,
+      options,
     );
     await taskFunction(gitTestClient);
   }, options);
