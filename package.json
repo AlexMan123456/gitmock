@@ -9,7 +9,8 @@
     "test-watch": "vitest",
     "format": "prettier --write --parser typescript 'src/**/*.ts' 'tests/**/*.ts' && ESLINT_MODE=fix eslint --fix 'src/**/*.ts' 'tests/**/*.ts'",
     "lint": "ESLINT_MODE=lint eslint 'src/**/*.ts' 'tests/**/*.ts' && prettier --check --parser typescript 'src/**/*.ts' 'tests/**/*.ts'",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build": "tsup"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
+    "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
   "dependencies": {
