@@ -86,6 +86,16 @@ class GitTestClient {
     await this.run("git", ["branch", "-D", tempBranch]);
     await this.run("git", ["push", "origin", "--delete", fromBranch]);
   }
+
+  async getGitLog() {
+    const { stdout: logs } = await this.run("git", [
+      "log",
+      "--oneline",
+      "--graph",
+      "--decorate",
+    ]);
+    return logs;
+  }
 }
 
 export default GitTestClient;
