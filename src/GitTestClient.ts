@@ -69,6 +69,23 @@ class GitTestClient {
     await gitTestClient.run("git", ["push", "origin", "main"]);
     return gitTestClient;
   }
+
+  async mergeChanges(fromBranch: string, toBranch: string = "main") {
+    const tempBranch = `temp-branch-${fromBranch}-to-${toBranch}`;
+
+    await this.run("git", ["checkout", "-b", tempBranch, toBranch]);
+    await this.run("git", [
+      "merge",
+      fromBranch,
+      "--no-ff",
+      "-m",
+      `Merge ${fromBranch} into ${toBranch}`,
+    ]);
+    await this.run("git", ["push", "origin", `${tempBranch}:${toBranch}`]);
+    await this.run("git", ["checkout", fromBranch]);
+    await this.run("git", ["branch", "-D", tempBranch]);
+    await this.run("git", ["push", "origin", "--delete", fromBranch]);
+  }
 }
 
 export default GitTestClient;
