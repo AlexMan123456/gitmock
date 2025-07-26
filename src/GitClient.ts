@@ -7,7 +7,7 @@ export interface InitialSetupOptions {
   initialCommitMessage?: string;
 }
 
-class GitTestClient {
+class GitClient {
   private homeDirectory: string;
   repository: string;
 
@@ -16,15 +16,19 @@ class GitTestClient {
     this.repository = path.resolve(this.homeDirectory, "test-repository");
   }
 
-  async run(command: string, args?: string[], options?: Omit<Options, "cwd">) {
+  public async run(
+    command: string,
+    args?: string[],
+    options?: Omit<Options, "cwd">,
+  ) {
     return await execa(command, args, { ...options, cwd: this.repository });
   }
 
-  static async create(
+  public static async create(
     directory: string,
     initialSetupOptions?: InitialSetupOptions,
   ) {
-    const gitTestClient = new GitTestClient(directory);
+    const gitTestClient = new GitClient(directory);
     await execa(
       "git",
       ["config", "--global", "user.email", "test@example.com"],
@@ -70,7 +74,7 @@ class GitTestClient {
     return gitTestClient;
   }
 
-  async mergeChanges(fromBranch: string, toBranch: string = "main") {
+  public async mergeChanges(fromBranch: string, toBranch: string = "main") {
     const tempBranch = `temp-branch-${fromBranch}-to-${toBranch}`;
 
     await this.run("git", ["checkout", "-b", tempBranch, toBranch]);
@@ -87,7 +91,7 @@ class GitTestClient {
     await this.run("git", ["push", "origin", "--delete", fromBranch]);
   }
 
-  async getGitLog() {
+  public async getGitLog() {
     const { stdout: logs } = await this.run("git", [
       "log",
       "--oneline",
@@ -98,4 +102,4 @@ class GitTestClient {
   }
 }
 
-export default GitTestClient;
+export default GitClient;
