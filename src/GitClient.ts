@@ -7,7 +7,7 @@ export interface InitialSetupOptions {
   initialCommitMessage?: string;
 }
 
-class GitTestClient {
+class GitClient {
   private homeDirectory: string;
   repository: string;
 
@@ -28,7 +28,7 @@ class GitTestClient {
     directory: string,
     initialSetupOptions?: InitialSetupOptions,
   ) {
-    const gitTestClient = new GitTestClient(directory);
+    const gitTestClient = new GitClient(directory);
     await execa(
       "git",
       ["config", "--global", "user.email", "test@example.com"],
@@ -102,4 +102,4 @@ class GitTestClient {
   }
 }
 
-export default GitTestClient;
+export default GitClient;
