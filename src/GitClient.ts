@@ -11,9 +11,12 @@ class GitClient {
   private homeDirectory: string;
   repository: string;
 
-  private constructor(homeDirectory: string) {
+  private constructor(
+    homeDirectory: string,
+    repositoryName: string = "test-repository",
+  ) {
     this.homeDirectory = homeDirectory;
-    this.repository = path.resolve(this.homeDirectory, "test-repository");
+    this.repository = path.resolve(this.homeDirectory, repositoryName);
   }
 
   public async run(
