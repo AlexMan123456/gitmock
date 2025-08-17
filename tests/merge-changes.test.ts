@@ -1,18 +1,16 @@
 import { readFile, writeFile } from "fs/promises";
-import { describe } from "node:test";
 import path from "path";
+
+import { describe, expect, test } from "vitest";
+
 import repositoryTask from "src/repository-task";
-import { expect, test } from "vitest";
 
 describe("mergeChanges", () => {
   test("Merges changes from specified branch into main", async () => {
     await repositoryTask(
       async (gitTestClient) => {
         await gitTestClient.run("git", ["checkout", "-b", "test-branch"]);
-        const testFilePath = path.join(
-          gitTestClient.repository,
-          "test-file.js",
-        );
+        const testFilePath = path.join(gitTestClient.repository, "test-file.js");
         await writeFile(testFilePath, 'console.log("This is a test");');
         await gitTestClient.run("git", ["add", "test-file.js"]);
         await gitTestClient.run("git", ["commit", "-m", "This is a test"]);
