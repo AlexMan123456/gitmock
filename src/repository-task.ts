@@ -1,6 +1,7 @@
 import type { InitialSetupOptions } from "src/GitClient";
+import type { DirectoryOptions } from "tempy";
 
-import { type DirectoryOptions, temporaryDirectoryTask } from "tempy";
+import { temporaryDirectoryTask } from "tempy";
 
 import GitClient from "src/GitClient";
 

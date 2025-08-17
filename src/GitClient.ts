@@ -1,7 +1,9 @@
+import type { Options } from "execa";
+
 import { writeFile } from "fs/promises";
 import path from "path";
 
-import { execa, type Options } from "execa";
+import { execa } from "execa";
 
 export interface InitialSetupOptions {
   initialFileName?: string;
