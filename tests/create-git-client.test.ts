@@ -1,8 +1,10 @@
 import { readFile } from "fs/promises";
 import path from "path";
-import GitClient from "src/GitClient";
+
 import { temporaryDirectoryTask } from "tempy";
 import { describe, expect, test } from "vitest";
+
+import GitClient from "src/GitClient";
 
 describe("Create GitClient", () => {
   test("Creates a new repository with a main branch in the given directory", async () => {
