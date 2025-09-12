@@ -12,7 +12,7 @@ export interface InitialSetupOptions {
 
 class GitClient {
   private homeDirectory: string;
-  repository: string;
+  public repository: string;
 
   private constructor(homeDirectory: string, repositoryName: string = "test-repository") {
     this.homeDirectory = homeDirectory;
